@@ -1,5 +1,7 @@
 from asyncio.windows_events import NULL
 from cProfile import label
+from calendar import c
+from operator import index
 from cv2 import line
 import pandas as pd
 import numpy as np
@@ -14,19 +16,23 @@ from pyparsing import null_debug_action
 
 DIR_CSV_JOB = "Job.csv"
 
-class JobSearch():
+class JobUI():
     def __init__(self):
         self.window = Tk()
-        self.Table =ttk.Treeview(self.window)
+        
         self.checkButton = Button(self.window)
         self.window.title("직업조회프로그램")
         self.window.geometry("1400x800")
-        colums = ("직업이름")
-        self.Table.config(columns=["직업이름"],displaycolumns=colums)
+        columns = ["직업이름"]
+        width = [400]
+        self.Table =ttk.Treeview(self.window,columns=columns,displaycolumns=columns)
         self.Table.place(x=10,y=60)
-        self.Table.column("직업이름",anchor="center")
-        self.Table.heading("직업이름",text="직업이름",anchor="center")
-        self.checkButton.config(width=50,text="선택")
+        for i in range(len(columns)):
+            self.Table.column(columns[i],width=width[i],anchor="center")
+            self.Table.heading(columns[i],text=columns[i],anchor="center")
+        self.Table["show"]= "headings"
+
+        self.checkButton.config(width=56,text="선택")
         self.checkButton.place(x=10,y=300)
 
         self.nameLabel = Label(self.window,text="간호사",font=("맑은고딕",20,"bold"))
@@ -97,14 +103,26 @@ class JobSearch():
         canvas2 = FigureCanvasTkAgg(fig2,master=self.window)
         canvas2.draw()
         canvas2.get_tk_widget().place(x=960,y=100)
-        
 
-class JobSearchSystem(JobSearch):
+
+class JobSearch(JobUI):
     def __init__(self):
-        JobSearch.__init__(self)
-        self.Search = Entry(self.window,width=30)
+        JobUI.__init__(self)
+        self.Search = Entry(self.window,width=55)
         self.Search.place(x=10,y=30)
-        self.SearchButton = Button(self.window,text="검색")
-        self.SearchButton.place(x=330,y=30)
-        self.window.mainloop()
+        self.SearchButton = Button(self.window,text="검색",command=self.Searchbtn)
+        self.SearchButton.place(x=375,y=30)
+    def Searchbtn(self):
+        index_key = self.Search.get()
+        action = JobSearchSystem()
+        action.Search(index_key,self.Table)
 
+
+class JobSearchSystem():
+    def Search(self,str,treeView):
+        df_Job = pd.read_csv("csv/Job.csv",encoding='CP949')
+        df_Job = df_Job.set_index('jobName',drop=False)
+        df_contains = df_Job[df_Job['jobName'].str.contains(str)]
+        for select_name in df_contains['jobName']:
+            name= df_contains['jobName'].loc[select_name]
+            treeView.insert('','end',text='',value=name,iid=name)

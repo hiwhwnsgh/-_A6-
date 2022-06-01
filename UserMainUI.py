@@ -4,13 +4,14 @@ from PIL import Image
 from PIL import Image,ImageTk
 from matplotlib import container
 
-from Job_Search import JobSearch, JobSearchSystem # python 3
+from Job_Search import JobUI,JobSearch # python 3
 
 IMG_WIDTH = 70
 IMG_HEIGHT = 70
 class Start_Main(tk.Tk):
     def __init__(self,*args,**kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
+        self.resizable(False, False)
         chageFrame= tk.Frame(self,width=50,bg="gray80")
         chageFrame.pack(side="left",fill="y")
         self.btn_ch1 = Button(chageFrame,padx=20,pady=20,command=lambda: self.show_frame("StartPage"),relief="flat",bg="gray80")
@@ -48,16 +49,17 @@ class Start_Main(tk.Tk):
 class StartPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        Job_SearchButton = Button(self,text="직업 검색",width=30,pady=10,font=("맑은고딕",12),background="SlateGray1",anchor="center",command=self.Job_Search)
+        Job_SearchButton = Button(self,text="직업 검색",width=30,pady=10,font=("맑은고딕",12),background="SlateGray1",anchor="center",command=self.Job_Search,relief="flat")
         Job_SearchButton.place(x=25,y=50)
-        Job_ListButton = Button(self,text="직업목록조회",width=30,pady=10,font=("맑은고딕",12),background="SlateGray1",anchor="center")
+        Job_ListButton = Button(self,text="직업목록조회",width=30,pady=10,font=("맑은고딕",12),background="SlateGray1",anchor="center",relief="flat")
         Job_ListButton.place(x=25,y=150)
-        User_suggestion = Button(self,text="회원맞춤직업추천",width=30,pady=10,font=("맑은고딕",12),background="SlateGray1",anchor="center")
+        User_suggestion = Button(self,text="회원맞춤직업추천",width=30,pady=10,font=("맑은고딕",12),background="SlateGray1",anchor="center",relief="flat")
         User_suggestion.place(x=25,y=250)
-        Spec_SearchButton = Button(self,text="SPEC 검색",width=30,pady=10,font=("맑은고딕",12),background="SlateGray1",anchor="center")
+        Spec_SearchButton = Button(self,text="SPEC 검색",width=30,pady=10,font=("맑은고딕",12),background="SlateGray1",anchor="center",relief="flat")
         Spec_SearchButton.place(x=25,y=350)
     def Job_Search(self):
-        Job_Search = JobSearchSystem()
+        Job_Search = JobSearch()
+        Job_Search.window.mainloop()
 
 
 class OtherPage(tk.Frame):
