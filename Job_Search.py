@@ -97,14 +97,11 @@ class JobSearch():
         canvas2 = FigureCanvasTkAgg(fig2,master=self.window)
         canvas2.draw()
         canvas2.get_tk_widget().place(x=960,y=100)
-    def get_window(self):
-        return self.window
         
 
 class JobSearchSystem(JobSearch):
     def __init__(self):
         JobSearch.__init__(self)
-        self.window = JobSearch.get_window()
         self.Search = Entry(self.window,width=30)
         self.Search.place(x=10,y=30)
         self.SearchButton = Button(self.window,text="검색")
