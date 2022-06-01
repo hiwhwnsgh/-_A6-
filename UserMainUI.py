@@ -57,7 +57,7 @@ class StartPage(tk.Frame):
         Spec_SearchButton = Button(self,text="SPEC 검색",width=30,pady=10,font=("맑은고딕",12),background="SlateGray1",anchor="center")
         Spec_SearchButton.place(x=25,y=350)
     def Job_Search(self):
-        JobSearchSystem()
+        Job_Search = JobSearchSystem()
 
 
 class OtherPage(tk.Frame):
