@@ -146,8 +146,8 @@ class JobSearch(JobUI):
 
 class JobSearchSystem():
     def __init__(self):
-        df_Job = pd.read_csv("csv/Job.csv",encoding='CP949')
-        self.df_Job = df_Job.set_index('jobName',drop=False)
+        jobDB = JobDB()
+        self.df_Job = jobDB.get_df()
     def SearchClick(self,str,treeView):
         # 테이블 초기화
         for item in treeView.get_children():
@@ -171,3 +171,10 @@ class JobSearchSystem():
         Link = self.df_Job['jobLink'].loc[index_key]
         job_add =[name,information,Certifi,Toeic,Department,Wage,Prospect,Equality,View,Sex,Link]
         return job_add
+
+class JobDB():
+    def __init__(self):
+        df_Job = pd.read_csv("csv/Job.csv",encoding='CP949')
+        self.df_Job = df_Job.set_index('jobName',drop=False)
+    def get_df(self):
+        return self.df_Job
