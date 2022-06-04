@@ -4,7 +4,6 @@ import pandas as pd
 
 class SpecSearchUI_right(Frame) :
     def __init__(self,parent,controller):
-        print('우측화면생성')
         Frame.__init__(self,parent)
         self.controller = controller
         self.parent= parent
@@ -12,12 +11,15 @@ class SpecSearchUI_right(Frame) :
         jobDB = JobDB()
         self.df_Job = jobDB.get_df()
 
+        userDB = UserDB()
+        self.df_User = userDB.get_df()
+
         # 검색창(Entry, Button) 프레임
         job_name_frame = Frame(self.parent)
 
         self.JobImageLabel = Label(job_name_frame, width=5)  # 검색버튼
         self.JobImageLabel.pack(side='left')
-        self.JobNameLabel = Label(job_name_frame, text = '경호원',width=10)  # 검색창
+        self.JobNameLabel = Label(job_name_frame, text = '',anchor="center",width=20)  # 검색창
         self.JobNameLabel.pack(side='left')
 
         job_name_frame.pack()
@@ -41,9 +43,9 @@ class SpecSearchUI_right(Frame) :
         self.SearchTable.column("three", width=180, )
         self.SearchTable.heading("three", text="직업", anchor="center")
         # 테이블 값 입력
-        job_list = [('필수','없음',''),
-                    ('관련','자동차운전면허 2종 보통\n(국가전문)','일반경비지도사\n(국가전문)\n자동차운전면허 제 1종,2종 보통\n(국가전문)'),
-                    ('TOEIC','500점','700점(가산점)'),
+        job_list = [('필수','',''),
+                    ('관련','',''),
+                    ('TOEIC','',''),
                     ]
 
         for i in range(len(job_list)):
@@ -56,14 +58,17 @@ class SpecSearchUI_right(Frame) :
     def forget(self):
         self.parent.pack_forget()
 
-    def modify(self,job_name):
+    def modify(self,job_name,user_name):
+
+        self.JobNameLabel.configure(text=job_name)
+
         for item in self.SearchTable.get_children():
             self.SearchTable.delete(item)
 
         # 테이블 값 입력
-        job_list = [('필수','없음',self.df_Job['jobCertifi'].loc[job_name]),
-                    ('관련','자동차운전면허 2종 보통\n(국가전문)',self.df_Job['jobCertifi'].loc[job_name]),
-                    ('TOEIC','500점',self.df_Job['jobToeic'].loc[job_name]),
+        job_list = [('필수',self.df_User['UserCertifi'].loc[user_name],self.df_Job['jobCertifi'].loc[job_name]),
+                    ('관련',self.df_User['UserCertifi'].loc[user_name],self.df_Job['jobCertifi'].loc[job_name]),
+                    ('TOEIC',self.df_User['UserToeic'].loc[user_name],self.df_Job['jobToeic'].loc[job_name]),
                     ]
 
         for i in range(len(job_list)):
@@ -76,3 +81,10 @@ class JobDB():
         self.df_Job = df_Job.set_index('jobName',drop=False)
     def get_df(self):
         return self.df_Job
+
+class UserDB():
+    def __init__(self):
+        df_User = pd.read_csv("csv/User.csv",encoding='CP949')
+        self.df_User = df_User.set_index('UserName',drop=False)
+    def get_df(self):
+        return self.df_User

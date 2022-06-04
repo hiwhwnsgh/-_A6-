@@ -50,7 +50,7 @@ class SpecSearchUI (Tk) :
 
         #선택버튼
         self.ChoiceButton = Button(left_frame, text = '선택',width = 30
-                                   ,command=lambda:self.choice(self.SearchTable.focus()))
+                                   ,command=lambda:self.choice(self.SearchTable.focus(),'류준호'))
         self.ChoiceButton.pack(pady=40)
 
         #오른쪽 프레임
@@ -60,8 +60,8 @@ class SpecSearchUI (Tk) :
         self.right_frame.pack_forget()
 
 
-    def choice(self,job_name):  #선택버튼시 호출되는 이벤트
-        self.frame.modify(job_name)
+    def choice(self,job_name,user_name):  #선택버튼시 호출되는 이벤트
+        self.frame.modify(job_name,user_name)
         self.right_frame.pack(side='right',expand=True)
 
 #컨트롤 클래스
