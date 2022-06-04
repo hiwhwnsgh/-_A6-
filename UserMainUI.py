@@ -5,7 +5,7 @@ from PIL import Image,ImageTk
 from matplotlib import container
 
 from Job_Search import JobUI,JobSearch # python 3
-
+#안녕하세요
 IMG_WIDTH = 70
 IMG_HEIGHT = 70
 class Start_Main(tk.Tk):
