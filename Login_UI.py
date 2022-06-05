@@ -80,6 +80,7 @@ class Login_Start():
                 self.window.destroy()
                 aaa = Start_Main(self.get_info)
                 aaa.geometry("430x550")
+                aaa.resizable(width=False,height=False)
                 aaa.mainloop()    
 
                 

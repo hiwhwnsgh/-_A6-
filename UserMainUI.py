@@ -91,7 +91,7 @@ class OtherPage(tk.Frame):
         Toeic.place(x=100,y=160)
         SpecTitel = Label(self,text="자격증",font=("맑은고딕",12),anchor="center")
         SpecTitel.place(x=30,y=190)
-        Spec = Label(self,text=self.UserRow[5],font=("맑은고딕",12),anchor="nw",wraplength=200)
+        Spec = Label(self,text=self.UserRow[5],font=("맑은고딕",12),anchor="nw",wraplength=120)
         Spec.place(x=30,y=210)
         EditButton = Button(self,text="편집",font=("맑은고딕",11),width=10,background="gray85",relief="flat")
         EditButton.place(x=230,y=95)
