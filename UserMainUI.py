@@ -11,8 +11,10 @@ from User_job_recommendation import User_job_recommendation
 IMG_WIDTH = 70
 IMG_HEIGHT = 70
 class Start_Main(tk.Tk):
-    def __init__(self,*args,**kwargs):
+    def __init__(self,login,*args,**kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
+        self.login = login
+        self.userRow = self.login.values[0]
         self.resizable(False, False)
         chageFrame= tk.Frame(self,width=50,bg="gray80")
         chageFrame.pack(side="left",fill="y")
@@ -37,7 +39,7 @@ class Start_Main(tk.Tk):
         self.frames = {}
         for F in (StartPage, OtherPage):
             page_name = F.__name__
-            frame = F(parent=container, controller=self)
+            frame = F(parent=container, controller=self,Row=self.userRow)
             self.frames[page_name] = frame
             frame.grid(row=0, column=0, sticky="nsew")
 
@@ -49,9 +51,10 @@ class Start_Main(tk.Tk):
         frame.tkraise()
 
 class StartPage(tk.Frame):
-    def __init__(self, parent, controller):
+    def __init__(self,Row, parent, controller):
         tk.Frame.__init__(self, parent)
         Job_SearchButton = Button(self,text="직업 검색",width=30,pady=10,font=("맑은고딕",12),background="SlateGray1",anchor="center",command=self.Job_Search,relief="flat")
+        self.UserRow = Row
         Job_SearchButton.place(x=25,y=50)
         Job_ListButton = Button(self,text="직업목록조회",width=30,pady=10,font=("맑은고딕",12),background="SlateGray1",anchor="center",relief="flat")
         Job_ListButton.place(x=25,y=150)
@@ -63,34 +66,32 @@ class StartPage(tk.Frame):
         Job_Search = JobSearch()
         Job_Search.mainloop()
     def User_recommendationbtn(self):
-        User_recommendationcommand = User_job_recommendation()
+        User_recommendationcommand = User_job_recommendation(self.UserRow[0])
         User_recommendationcommand.mainloop()
 
 
 class OtherPage(tk.Frame):
-    def __init__(self, parent, controller):
+    def __init__(self,Row,parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
         TitleLabel = Label(self,text="프로필",font=("맑은고딕",16,"bold"),anchor="center")
         TitleLabel.place(x=30,y=30)
+        self.UserRow = Row
         NameTitle = Label(self,text="이름 : ",font=("맑은고딕",12),anchor="center")
         NameTitle.place(x=30,y=100)
-        Name = Label(self,text="조준호",font=("맑은고딕",12),anchor="center")
+        Name = Label(self,text=self.UserRow[0],font=("맑은고딕",12),anchor="center")
         Name.place(x=80,y=100)
         IdTitle = Label(self,text ="아이디 : ",font=("맑은고딕",12),anchor="center")
         IdTitle.place(x=30,y=130)
-        Id = Label(self,text="hiwhwnsgh",font=("맑은고딕",12),anchor="center")
+        Id = Label(self,text=self.UserRow[1],font=("맑은고딕",12),anchor="center")
         Id.place(x=100,y=130)
         ToeicTitle = Label(self,text="TOEIC : ",font=("맑은고딕",12),anchor="center")
         ToeicTitle.place(x=30,y=160)
-        Toeic = Label(self,text="890점",font=("맑은고딕",12),anchor="center")
+        Toeic = Label(self,text=str(self.UserRow[6])+"점",font=("맑은고딕",12),anchor="center")
         Toeic.place(x=100,y=160)
         SpecTitel = Label(self,text="자격증",font=("맑은고딕",12),anchor="center")
         SpecTitel.place(x=30,y=190)
-        Spec = Label(self,text="없음",font=("맑은고딕",12),anchor="e")
+        Spec = Label(self,text=self.UserRow[5],font=("맑은고딕",12),anchor="nw",wraplength=200)
         Spec.place(x=30,y=210)
         EditButton = Button(self,text="편집",font=("맑은고딕",11),width=10,background="gray85",relief="flat")
         EditButton.place(x=230,y=95)
-app = Start_Main()
-app.geometry("430x550")
-app.mainloop()

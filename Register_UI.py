@@ -83,4 +83,3 @@ class Register_UI ():
 
         self.window.mainloop()
 
-ddd = Register_UI()
