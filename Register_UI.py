@@ -97,6 +97,7 @@ class Register_UI ():
 
         self.window.mainloop()
 
+
     def User_Edit_System (self):
         
 
@@ -192,4 +193,3 @@ class Register_UI ():
 
 
         
-

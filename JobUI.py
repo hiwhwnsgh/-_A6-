@@ -25,6 +25,7 @@ class JobUI():
         self.checkButton = Button(self.window)
         self.window.title("직업조회프로그램")
         self.window.geometry("1400x800")
+        self.window.resizable(width=False,height=False)
         # TreeView 기본 설정
         columns = ["직업이름"]
         width = [400]

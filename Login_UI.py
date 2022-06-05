@@ -78,9 +78,10 @@ class Login_Start():
             if i == self.Pw_Entry.get() :
                 self.window.quit()
                 self.window.destroy()
-
-                aaa = Start_Main()
+                aaa = Start_Main(self.get_info)
                 aaa.geometry("430x550")
+                aaa.resizable(width=False,height=False)
+
                 aaa.mainloop()    
 
                 
@@ -92,8 +93,5 @@ class Login_Start():
 
 
 
+
 abc = Login_Start()
-
-
-
-
