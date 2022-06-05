@@ -81,6 +81,7 @@ class Login_Start():
                 aaa = Start_Main(self.get_info)
                 aaa.geometry("430x550")
                 aaa.resizable(width=False,height=False)
+
                 aaa.mainloop()    
 
                 
@@ -88,6 +89,7 @@ class Login_Start():
             else:
                 messagebox.showinfo("로그인 에러","아이디나 비밀번호가 일치하지 않습니다.")
                 return 0
+
 
 
 
