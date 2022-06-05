@@ -3,10 +3,10 @@ from tkinter import Button, Label, PhotoImage, font  as tkfont
 from PIL import Image
 from PIL import Image,ImageTk
 from matplotlib import container
-
-from JobUI import JobUI # python 3
 from JobSearch import JobSearch
 
+from JobUI import JobUI # python 3
+from User_job_recommendation import User_job_recommendation
 #안녕하세요
 IMG_WIDTH = 70
 IMG_HEIGHT = 70
@@ -55,13 +55,16 @@ class StartPage(tk.Frame):
         Job_SearchButton.place(x=25,y=50)
         Job_ListButton = Button(self,text="직업목록조회",width=30,pady=10,font=("맑은고딕",12),background="SlateGray1",anchor="center",relief="flat")
         Job_ListButton.place(x=25,y=150)
-        User_suggestion = Button(self,text="회원맞춤직업추천",width=30,pady=10,font=("맑은고딕",12),background="SlateGray1",anchor="center",relief="flat")
+        User_suggestion = Button(self,text="회원맞춤직업추천",width=30,pady=10,font=("맑은고딕",12),background="SlateGray1",anchor="center",relief="flat",command=self.User_recommendationbtn)
         User_suggestion.place(x=25,y=250)
         Spec_SearchButton = Button(self,text="SPEC 검색",width=30,pady=10,font=("맑은고딕",12),background="SlateGray1",anchor="center",relief="flat")
         Spec_SearchButton.place(x=25,y=350)
     def Job_Search(self):
         Job_Search = JobSearch()
         Job_Search.mainloop()
+    def User_recommendationbtn(self):
+        User_recommendationcommand = User_job_recommendation()
+        User_recommendationcommand.mainloop()
 
 
 class OtherPage(tk.Frame):

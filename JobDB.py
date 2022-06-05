@@ -1,5 +1,3 @@
-from operator import index
-from xml.dom import NotFoundErr
 import pandas as pd
 
 class JobDB():

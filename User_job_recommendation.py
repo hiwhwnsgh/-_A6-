@@ -6,6 +6,4 @@ class User_job_recommendation(JobUI):
     def __init__(self):
         JobUI.__init__(self)
         User_job_recommendationSystem.__init__(self,self.Table)
-app = User_job_recommendation()
-app.mainloop()
         
