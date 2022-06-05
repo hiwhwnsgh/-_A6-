@@ -47,4 +47,3 @@ class SpeckSearchUI_right(Frame) :
         #확인버튼
         self.Confirm_Button = Button(self.parent, text = '확인',width = 30)
         self.Confirm_Button.pack(pady=40)
-

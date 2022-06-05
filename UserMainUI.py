@@ -4,7 +4,9 @@ from PIL import Image
 from PIL import Image,ImageTk
 from matplotlib import container
 
-from Job_Search import JobUI,JobSearch # python 3
+from JobUI import JobUI # python 3
+from JobSearch import JobSearch
+
 #안녕하세요
 IMG_WIDTH = 70
 IMG_HEIGHT = 70
@@ -59,7 +61,7 @@ class StartPage(tk.Frame):
         Spec_SearchButton.place(x=25,y=350)
     def Job_Search(self):
         Job_Search = JobSearch()
-        Job_Search.window.mainloop()
+        Job_Search.mainloop()
 
 
 class OtherPage(tk.Frame):
