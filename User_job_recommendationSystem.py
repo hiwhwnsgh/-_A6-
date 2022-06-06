@@ -5,10 +5,10 @@ from UserDB import UserDB
 class User_job_recommendationSystem():
     def __init__(self,treeView,name):
         userdb = UserDB()
+        jobdb = JobDB()
         userdb.set_index_key(name)
         userCertifi = userdb.get_Certifi()
         userCertifi = userCertifi.split(",")
-        jobdb = JobDB()
         self.jobdb = jobdb.get_df()
         for item in treeView.get_children():
             treeView.delete(item)
