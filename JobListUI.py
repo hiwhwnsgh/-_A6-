@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter.ttk import*
 from JobDB import*
+from JobListSystem import*
+
 
 class JobListUI (Tk):
     def __init__(self):
@@ -39,11 +41,11 @@ class JobListUI (Tk):
         self.JobListTable.column("three",width=100,)
         self.JobListTable.heading("three",text = "전망",anchor="center")
 
-        # 테이블 값 입력 (직업이름, 관련학과, 전망)
-        for index,row in self.df_Job.iterrows():
-            self.JobListTable.insert('','end',text='',value=(row['jobName'],row['jobDepartment'],row['jobProspect']))
-
         frame.pack(pady=10)
+
+        self.action = JobListSystem()
+        self.action.list_call(self.JobListTable)
+
 
 
 app = JobListUI()
