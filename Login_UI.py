@@ -3,6 +3,7 @@ from tkinter import messagebox
 from Register_UI import Register_UI
 from UserMainUI import Start_Main
 import pandas as pd
+import msvcrt
 
 ## 아아
 User_CSV = "csv/User.csv"
@@ -35,7 +36,7 @@ class Login_Start():
         self.Pw_text_label = Label(self.window,text="비밀번호",font=("맑은고딕",11))
         self.Pw_text_label.place(x=80,y=277)
 
-        self.Pw_Entry = Entry(self.window)
+        self.Pw_Entry = Entry(self.window,show='*')
         self.Pw_Entry.place(x=80,y=305,width=390,height=30) ###
 
         self.Login_button = Button(self.window,text="로 그 인",bg="cornflowerblue",font=("맑은고딕",18,"bold"),\
@@ -74,7 +75,6 @@ class Login_Start():
 
 
         for i in self.get_info['UserPw'] :
-
             if i == self.Pw_Entry.get() :
                 self.window.quit()
                 self.window.destroy()
