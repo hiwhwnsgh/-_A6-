@@ -1,11 +1,12 @@
 
 from JobDB import JobDB
 from JobDB import *
+from UserDB import UserDB
 class User_job_recommendationSystem():
     def __init__(self,treeView,name):
-        self.df_User = pd.read_csv("csv/User.csv",encoding='CP949')
-        self.df_User = self.df_User.set_index('UserName',drop=False)
-        userCertifi = self.df_User['UserCertifi'].loc[name]
+        userdb = UserDB()
+        userdb.set_index_key(name)
+        userCertifi = userdb.get_Certifi()
         userCertifi = userCertifi.split(",")
         jobdb = JobDB()
         self.jobdb = jobdb.get_df()
