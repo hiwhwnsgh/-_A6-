@@ -4,14 +4,16 @@ from JobDB import JobDB
 from JobDB import *
 from UserDB import UserDB
 class User_job_recommendationSystem():
-    def __init__(self,treeView,name):
-        userdb = UserDB()
-        jobdb = JobDB()
-        userdb.set_index_key(name)
-        userCertifi = userdb.get_Certifi()
+    def __init__(self):
+        self.userdb = UserDB()
+        self.jobdb = JobDB()
+        
+    def insert_treeview(self,treeView,name):
+        self.userdb.set_index_key(name)
+        self.userCertifi = self.userdb.get_Certifi()
         try:
-            userCertifi = userCertifi.split(",")
-            self.jobdb = jobdb.get_df()
+            userCertifi = self.userCertifi.split(",")
+            self.jobdb = self.jobdb.get_df()
             count = 0
             for item in treeView.get_children():
                 treeView.delete(item)
