@@ -13,4 +13,3 @@ class JobSearch(JobUI):
         index_key = self.Search.get()
         self.action.SearchClick(index_key,self.Table)
         self.Search.delete("0","end")
-    
