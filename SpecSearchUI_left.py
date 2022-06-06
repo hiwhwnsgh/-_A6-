@@ -1,9 +1,8 @@
 from tkinter import *
 from tkinter.ttk import *
-from SpecSearchUI_right import*
+from SpecSearchSystem import*
 import pandas as pd
 
-DIR_CSV_JOB = "Job.csv"
 
 class SpecSearchUI (Tk) :
     def __init__(self):
@@ -63,25 +62,6 @@ class SpecSearchUI (Tk) :
     def choice(self,job_name,user_name):  #선택버튼시 호출되는 이벤트
         self.frame.modify(job_name,user_name)
         self.right_frame.pack(side='right',expand=True)
-
-#컨트롤 클래스
-class SpecSearchSystem() :
-    def __init__(self):
-        jobDB = JobDB()
-        self.df_Job = jobDB.get_df()
-
-    def SearchClick(self,word,treeView):
-        # 테이블 초기화
-        for item in treeView.get_children():
-            treeView.delete(item)
-
-        # 검색어(자격증)가 포함된 df
-        df_contains = self.df_Job[self.df_Job['jobCertifi'].str.contains(word)]
-
-        # 추출한 df에서 직업이름을 Table에 추가
-        for select_name in df_contains['jobName']:
-            name= df_contains['jobName'].loc[select_name]
-            treeView.insert('','end',text='',value=name,iid=name)
 
 
 app = SpecSearchUI()

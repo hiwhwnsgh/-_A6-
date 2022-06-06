@@ -1,18 +1,15 @@
 from tkinter import *
 from tkinter.ttk import *
 import pandas as pd
+from UserDB import*
+from JobDB import*
+
 
 class SpecSearchUI_right(Frame) :
     def __init__(self,parent,controller):
         Frame.__init__(self,parent)
         self.controller = controller
         self.parent= parent
-
-        jobDB = JobDB()
-        self.df_Job = jobDB.get_df()
-
-        userDB = UserDB()
-        self.df_User = userDB.get_df()
 
         # 검색창(Entry, Button) 프레임
         job_name_frame = Frame(self.parent)
@@ -59,32 +56,25 @@ class SpecSearchUI_right(Frame) :
         self.parent.pack_forget()
 
     def modify(self,job_name,user_name):
+        #직업DB 객체 생성
+        self.jobDB = JobDB()
+        self.jobDB.set_index_key(job_name)
 
+        #회원DB 객체 생성
+        self.userDB = UserDB()
+        self.userDB.set_index_key(user_name)
+
+        #선택한 직업의 이름으로 레이블 변경
         self.JobNameLabel.configure(text=job_name)
 
+        #기존 데이터 제거
         for item in self.SearchTable.get_children():
             self.SearchTable.delete(item)
 
         # 테이블 값 입력
-        job_list = [('필수',self.df_User['UserCertifi'].loc[user_name],self.df_Job['jobCertifi'].loc[job_name]),
-                    ('관련',self.df_User['UserCertifi'].loc[user_name],self.df_Job['jobCertifi'].loc[job_name]),
-                    ('TOEIC',self.df_User['UserToeic'].loc[user_name],self.df_Job['jobToeic'].loc[job_name]),
+        job_list = [('자격증',('\n').join(self.userDB.get_Certifi().split(', ')), ('\n').join(self.jobDB.get_Certifi().split(', '))),
+                    ('TOEIC',self.userDB.get_Toeic(), self.jobDB.get_Toeic()),
                     ]
-
         for i in range(len(job_list)):
             self.SearchTable.insert('', 'end', values=job_list[i])
 
-
-class JobDB():
-    def __init__(self):
-        df_Job = pd.read_csv("csv/Job.csv",encoding='CP949')
-        self.df_Job = df_Job.set_index('jobName',drop=False)
-    def get_df(self):
-        return self.df_Job
-
-class UserDB():
-    def __init__(self):
-        df_User = pd.read_csv("csv/User.csv",encoding='CP949')
-        self.df_User = df_User.set_index('UserName',drop=False)
-    def get_df(self):
-        return self.df_User

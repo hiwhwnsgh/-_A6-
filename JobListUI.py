@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter.ttk import*
-import pandas as pd
+from JobDB import*
 
 class JobListUI (Tk):
     def __init__(self):
@@ -9,6 +9,7 @@ class JobListUI (Tk):
         self.geometry("800x500")
         self.resizable(False,False)
 
+        #직업 DB 생성
         jobDB = JobDB()
         self.df_Job = jobDB.get_df()
 
@@ -44,12 +45,6 @@ class JobListUI (Tk):
 
         frame.pack(pady=10)
 
-class JobDB():
-    def __init__(self):
-        df_Job = pd.read_csv("csv/Job.csv",encoding='CP949')
-        self.df_Job = df_Job.set_index('jobName',drop=False)
-    def get_df(self):
-        return self.df_Job
 
 app = JobListUI()
 app.mainloop()

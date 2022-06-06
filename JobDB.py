@@ -42,3 +42,6 @@ class JobDB():
     def get_Link(self):
         Link = self.df_Job['jobLink'].loc[self.index_key]
         return Link
+    def get_Toeic(self):
+        Toeic = self.df_Job['jobToeic'].loc[self.index_key]
+        return Toeic
