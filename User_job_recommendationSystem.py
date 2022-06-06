@@ -12,13 +12,16 @@ class User_job_recommendationSystem():
         try:
             userCertifi = userCertifi.split(",")
             self.jobdb = jobdb.get_df()
+            count = 0
             for item in treeView.get_children():
                 treeView.delete(item)
             for i in range(len(userCertifi)):
                 row = self.jobdb[self.jobdb['jobCertifi'].str.contains(userCertifi[i])]
                 for select_row in row['jobName']:
+                    count+=1
                     name= row['jobName'].loc[select_row]
                     treeView.insert('','end',text='',value=name,iid=name)
-                    # 테이블 초기화
+            if count == 0:
+                messagebox.showerror('알림','등록된 자격증 중에 추천 직업이 없습니다')
         except:
-            messagebox.showerror('알림','등록된 자격증이 없습니다. 소지하고 계신 자격증을 등록해주세요!')
+            messagebox.showerror('알림','등록된 자격증 중에 추천 직업이 없습니다')
