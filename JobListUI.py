@@ -47,6 +47,3 @@ class JobListUI (Tk):
         self.action.list_call(self.JobListTable)
 
 
-
-app = JobListUI()
-app.mainloop()

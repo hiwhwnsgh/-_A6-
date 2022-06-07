@@ -4,7 +4,7 @@ from SpecSearchSystem import*
 import pandas as pd
 
 
-class SpecSearchUI (Tk) :
+class SpecSearchUI_left (Tk) :
     def __init__(self):
         Tk.__init__(self)
         #self.window = Tk()
@@ -62,7 +62,3 @@ class SpecSearchUI (Tk) :
     def choice(self,job_name,user_name):  #선택버튼시 호출되는 이벤트
         self.frame.modify(job_name,user_name)
         self.right_frame.pack(side='right',expand=True)
-
-
-app = SpecSearchUI()
-app.mainloop()
