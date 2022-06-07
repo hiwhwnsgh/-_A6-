@@ -4,6 +4,8 @@ from PIL import Image
 from PIL import Image,ImageTk
 from matplotlib import container
 from JobSearch import JobSearch
+from JobListUI import JobListUI
+from SpecSearchUI_left import SpecSearchUI_left
 
 from JobUI import JobUI # python 3
 from User_job_recommendation import User_job_recommendation
@@ -56,11 +58,11 @@ class StartPage(tk.Frame):
         Job_SearchButton = Button(self,text="직업 검색",width=30,pady=10,font=("맑은고딕",12),background="SlateGray1",anchor="center",command=self.Job_Search,relief="flat")
         self.UserRow = Row
         Job_SearchButton.place(x=25,y=50)
-        Job_ListButton = Button(self,text="직업목록조회",width=30,pady=10,font=("맑은고딕",12),background="SlateGray1",anchor="center",relief="flat")
+        Job_ListButton = Button(self,text="직업목록조회",width=30,pady=10,font=("맑은고딕",12),background="SlateGray1",anchor="center",relief="flat",command=self.Job_List)
         Job_ListButton.place(x=25,y=150)
         User_suggestion = Button(self,text="회원맞춤직업추천",width=30,pady=10,font=("맑은고딕",12),background="SlateGray1",anchor="center",relief="flat",command=self.User_recommendationbtn)
         User_suggestion.place(x=25,y=250)
-        Spec_SearchButton = Button(self,text="SPEC 검색",width=30,pady=10,font=("맑은고딕",12),background="SlateGray1",anchor="center",relief="flat")
+        Spec_SearchButton = Button(self,text="SPEC 검색",width=30,pady=10,font=("맑은고딕",12),background="SlateGray1",anchor="center",relief="flat",command=self.Spec_Search)
         Spec_SearchButton.place(x=25,y=350)
     def Job_Search(self):
         Job_Search = JobSearch()
@@ -68,7 +70,12 @@ class StartPage(tk.Frame):
     def User_recommendationbtn(self):
         User_recommendationcommand = User_job_recommendation(self.UserRow[0])
         User_recommendationcommand.mainloop()
-
+    def Job_List(self):
+        Job_List = JobListUI()
+        Job_List.mainloop()
+    def Spec_Search(self):
+        Spec_Search = SpecSearchUI_left()
+        Spec_Search.mainloop()
 
 class OtherPage(tk.Frame):
     def __init__(self,Row,parent, controller):
