@@ -2,6 +2,12 @@
 ## 메인화면
 ![메인화면](https://user-images.githubusercontent.com/78071893/201482103-d6642594-0d54-4210-9c37-c51152a4e92d.png)
 
+## 목표
+- 희망하는 직업에 취업을 원할 때 평균적으로 필요한 조건을 자신이 가진 자격증이나 토익점수와 비교해 부족한 부분을 출력해주는 프로그램을 개발하고자 한다
+
+## 기능
+- 직업 검색, 조회, 순위, 맞춤 추천을 통해 직업 정보를 소개한다.
+- 현재 사용자의 스펙의 조회 및 비교 한다.
 
 ## 기여자
   |이름|역할|GitHub|GitHub Name|
@@ -37,9 +43,14 @@
 </details>
 
 ## DB 설계
-### User테이블
+<details>
+<summary>User테이블</summary>
 
 ![사용자 테이블](https://user-images.githubusercontent.com/78071893/201481855-feb74171-5397-4484-b9bf-2ac071143662.png)
-### Job테이블
+</details>
+
+<details>
+<summary>Job테이블</summary>
 
 ![직업테이블](https://user-images.githubusercontent.com/78071893/201481870-9a281dd8-6659-4663-9035-40d6d50cff8e.png)
+</details>
